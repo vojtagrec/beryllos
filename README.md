@@ -1,4 +1,6 @@
-# beryllos &nbsp; [![bluebuild build badge](https://github.com/vojtagrec/beryllos/actions/workflows/build.yml/badge.svg)](https://github.com/vojtagrec/beryllos/actions/workflows/build.yml)
+# BeryllOS &nbsp; [![bluebuild build badge](https://github.com/vojtagrec/beryllos/actions/workflows/build.yml/badge.svg)](https://github.com/vojtagrec/beryllos/actions/workflows/build.yml)
+
+> βήρυλλος [bḗryllos] is Ancient Greek for beryl. Blue beryl is almost indistinguishable from bazzite. 
 
 See the [BlueBuild docs](https://blue-build.org/how-to/setup/) for quick setup instructions for setting up your own repository based on this template.
 
