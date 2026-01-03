@@ -25,10 +25,16 @@ modules:
 
   - type: dnf
     repos:
+      files:
+        - https://download.sublimetext.com/rpm/stable/x86_64/sublime-text.repo
       copr:
         - atim/starship
     install:
       packages:
+        - repo: sublime-text
+          packages:
+            - sublime-text
+            - sublime-merge
         - micro
         - starship
 
