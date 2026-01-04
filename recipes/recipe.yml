@@ -65,6 +65,10 @@ modules:
     src: /modules
     dest: /usr/lib/modules
   
+  - type: copy
+    src: kmod.der
+    dest: /etc/pki/beryllos/certs/kmod_public.der
+  
   - type: initramfs
 
   - type: signing # this sets up the proper policy & signing files for signed images to work fully
