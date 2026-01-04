@@ -16,7 +16,7 @@ concurrency:
   cancel-in-progress: true
 jobs:
   bluebuild:
-    name: Build Custom Image
+    name: Build BeryllOS
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -29,8 +29,18 @@ jobs:
           # !! Add your recipes here
           - recipe.yml
     steps:
+      - name: Checkout files
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+
+      - name: Set kernel module signing key
+        run: echo "${KMOD_PRIVATE_KEY}" > "${GITHUB_WORKSPACE}/kmod.priv"
+        env:
+          KMOD_PRIVATE_KEY: ${{ secrets.KMOD_PRIVATE_KEY }}
+
       # the build is fully handled by the reusable github action
-      - name: Build Custom Image
+      - name: Build image
         uses: blue-build/github-action@v1.10
         with:
           recipe: ${{ matrix.recipe }}
@@ -40,6 +50,6 @@ jobs:
 
           # enabled by default, disable if your image is small and you want faster builds
           maximize_build_space: true
-        env:
-          KMOD_PRIVATE_KEY: ${{ secrets.KMOD_PRIVATE_KEY }}
+          # we handle checkout above to accomodate for kernel module signing key
+          skip_checkout: true
           
