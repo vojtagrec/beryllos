@@ -13,16 +13,11 @@ platforms:
 
 stages:
   - name: it87-extras
-    from: ghcr.io/ublue-os/bazzite
+    from: ghcr.io/ublue-os/bazzite-dx
     modules:
-      - type: script
-        snippets:
-          - mkdir -p /tmp/beryllos
-          - echo "$KMOD_PRIVATE_KEY" > /tmp/beryllos/kmod.priv
-
       - type: copy
-        src: kmod.der
-        dest: /tmp/beryllos/kmod.der
+        src: kmod.*
+        dest: /tmp/beryllos/
 
       - type: script
         scripts:
@@ -67,12 +62,8 @@ modules:
 
   - type: copy
     from: it87-extras
-    src: /output/*
-    dest: /
-
-  - type: script
-    snippets:
-      - depmod -a
+    src: /modules
+    dest: /usr/lib/modules
   
   - type: initramfs
 
