@@ -27,15 +27,25 @@ modules:
     repos:
       files:
         - https://download.sublimetext.com/rpm/stable/x86_64/sublime-text.repo
+      keys:
+        - https://download.sublimetext.com/sublimehq-rpm-pub.gpg
       copr:
         - atim/starship
     install:
       packages:
-        - repo: sublime-text
-          packages:
-            - sublime-text
-            - sublime-merge
+        #- repo: sublime-text
+        #  packages:
+        #    - sublime-text
+        #    - sublime-merge
         - micro
         - starship
+
+  # temporary workaround for failing Sublime apps install
+  # see https://forum.sublimetext.com/t/installation-in-fedora-43-not-possible/77387
+  - type: script
+    snippets:
+      - dnf5 download sublime-text sublime-merge
+      - rpm -i --nodigest sublime-*.rpm
+      - rm -f sublime-*.rpm
 
   - type: signing # this sets up the proper policy & signing files for signed images to work fully
