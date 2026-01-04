@@ -4,7 +4,7 @@ set -euxo pipefail
 
 # Compile it87-extras kernel module
 
-KERNEL="$(uname -r)"
+KERNEL="$(rpm -q 'kernel' --queryformat '%{VERSION}-%{RELEASE}.%{ARCH}')"
 
 dnf5 -y install "kernel-devel-${KERNEL}"
 dnf5 -y group install development-tools
