@@ -3,3 +3,5 @@ cosign.private
 .secrets
 /Containerfile
 /.bluebuild-scripts_*
+/kmod.priv
+/.kmod
