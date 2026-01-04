@@ -11,6 +11,23 @@ image-version: latest # latest is also supported if you want new updates ASAP
 platforms:
   - linux/amd64
 
+stages:
+  - name: it87-extras
+    from: ghcr.io/ublue-os/bazzite
+    modules:
+      - type: script
+        snippets:
+          - mkdir -p /tmp/beryllos
+          - echo "$KMOD_PRIVATE_KEY" > /tmp/beryllos/kmod.priv
+
+      - type: copy
+        src: kmod.der
+        dest: /tmp/beryllos/kmod.der
+
+      - type: script
+        scripts:
+          - it87-extras.sh
+
 # module configuration, executed in order
 # you can include multiple instances of the same module
 modules:
@@ -47,5 +64,16 @@ modules:
       - dnf5 download sublime-text sublime-merge
       - rpm -i --nodigest sublime-*.rpm
       - rm -f sublime-*.rpm
+
+  - type: copy
+    from: it87-extras
+    src: /output/*
+    dest: /
+
+  - type: script
+    snippets:
+      - depmod -a
+  
+  - type: initramfs
 
   - type: signing # this sets up the proper policy & signing files for signed images to work fully
