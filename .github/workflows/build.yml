@@ -39,6 +39,13 @@ jobs:
         env:
           KMOD_PRIVATE_KEY: ${{ secrets.KMOD_PRIVATE_KEY }}
 
+      - name: Mount BTRFS loopback
+        uses: ublue-os/container-storage-action@911baca08baf30c8654933e9e9723cb399892140
+        with:
+          target-dir: /var/lib/containers
+          mount-opts: compress-force=zstd:2
+          loopback-free: 0.5
+
       # the build is fully handled by the reusable github action
       - name: Build image
         uses: blue-build/github-action@v1.10
