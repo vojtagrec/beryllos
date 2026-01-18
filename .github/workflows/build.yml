@@ -41,8 +41,12 @@ jobs:
         env:
           KMOD_PRIVATE_KEY: ${{ secrets.KMOD_PRIVATE_KEY }}
 
-      - name: Maximize build space
-        uses: ublue-os/remove-unwanted-software@v9
+      - name: Mount BTRFS loopback
+        uses: ublue-os/container-storage-action@911baca08baf30c8654933e9e9723cb399892140
+        with:
+          target-dir: /home/runner/.local/share/containers/storage
+          mount-opts: compress-force=zstd:2
+          loopback-free: 0.6
 
       # the build is fully handled by the reusable github action
       - name: Build image
