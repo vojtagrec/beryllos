@@ -42,7 +42,15 @@ modinfo "${KERNEL_DIR}/updates/it87-extras.ko.xz" \
 # Remove certificates
 rm "${BUILD_DIR}/certs/signing_key.pem" "${BUILD_DIR}/certs/signing_key.x509"
 
-#ls -lah "${KERNEL_DIR}" 1>&2
+#find "${KERNEL_DIR}" -print 1>&2
 
 mkdir -p /modules
-cp -rp "$KERNEL_DIR" "/modules/"
+
+VERFILE=$(realpath VERSION)
+
+# Copy updated files from /lib/modules to /modules
+cd /lib/modules
+find . -newermm "$VERFILE" -type d | cpio -pdm /modules/
+find . -newermm "$VERFILE" -type f -exec cp -pd --parents "{}" /modules/ \;
+
+#find /modules -print 1>&2
