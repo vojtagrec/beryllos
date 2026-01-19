@@ -21,4 +21,4 @@ else
     chunked='false'
 fi
 
-BB_BUILD_CHUNKED_OCI="$chunked" bluebuild build -T rpm-ostree -S cosign -R podman -v recipes/recipe.yml
+BB_BUILD_CHUNKED_OCI="$chunked" BB_BUILD_CHUNKED_OCI_MAX_LAYERS=192 bluebuild build -T rpm-ostree -S cosign -R podman -v recipes/recipe.yml
