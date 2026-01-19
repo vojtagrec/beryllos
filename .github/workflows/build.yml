@@ -54,7 +54,4 @@ jobs:
           maximize_build_space: true
           # we handle checkout above to accomodate for kernel module signing key
           skip_checkout: true
-          # reduce layer sizes by usind chunked builds
-          build_chunked_oci: true
-          build_opts: --compression-format zstd --build-driver buildah
           
