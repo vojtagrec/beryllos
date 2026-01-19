@@ -41,9 +41,6 @@ jobs:
         env:
           KMOD_PRIVATE_KEY: ${{ secrets.KMOD_PRIVATE_KEY }}
 
-      - name: Mount BTRFS loopback
-        uses: ublue-os/container-storage-action@911baca08baf30c8654933e9e9723cb399892140
-
       # the build is fully handled by the reusable github action
       - name: Build image
         uses: blue-build/github-action@v1.10
@@ -59,7 +56,5 @@ jobs:
           skip_checkout: true
           # reduce layer sizes by usind chunked builds
           build_chunked_oci: true
-          max_layers: 192
-          # remove base image to free more space, might be added as a param in https://github.com/blue-build/github-action/pull/131
-          build_opts: "--remove-base-image"
+          build_opts: --compression-format zstd --build-driver buildah
           
