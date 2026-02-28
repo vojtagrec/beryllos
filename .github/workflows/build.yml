@@ -56,4 +56,8 @@ jobs:
           skip_checkout: true
           build_opts: --compression-format zstd --build-driver buildah
           retry_push_count: 3
+
+          build_chunked_oci: true
+          # work around build_chunked_oci issue https://github.com/bootc-dev/bootc/issues/1885
+          rechunk_clear_plan: true
           

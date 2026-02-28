@@ -15,10 +15,4 @@ case "$1" in
         ;;
 esac
 
-if [[ "$1" == "chunked" ]]; then
-    chunked='true'
-else
-    chunked='false'
-fi
-
-BB_BUILD_CHUNKED_OCI="$chunked" bluebuild build -T rpm-ostree -S cosign -R podman -B buildah -c zstd -v recipes/recipe.yml
+BB_BUILD_CHUNKED_OCI="$chunked" BB_BUILD_RECHUNK_CLEAR_PLAN=true bluebuild build -T rpm-ostree -S cosign -R podman -B buildah -c zstd -v recipes/recipe.yml
