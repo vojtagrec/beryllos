@@ -46,21 +46,13 @@ modules:
         - atim/starship
     install:
       packages:
-        #- repo: sublime-text
-        #  packages:
-        #    - sublime-text
-        #    - sublime-merge
+        - repo: sublime-text
+          packages:
+            - sublime-text
+            - sublime-merge
         - nordvpn-gui
         - micro
         - starship
-
-  # temporary workaround for failing Sublime apps install
-  # see https://forum.sublimetext.com/t/installation-in-fedora-43-not-possible/77387
-  - type: script
-    snippets:
-      - dnf5 download sublime-text sublime-merge
-      - rpm -i --nodigest sublime-*.rpm
-      - rm -f sublime-*.rpm
 
   - type: copy
     from: it87-extras
