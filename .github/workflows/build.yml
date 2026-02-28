@@ -55,5 +55,5 @@ jobs:
           # we handle checkout above to accomodate for kernel module signing key
           skip_checkout: true
           build_opts: --compression-format zstd --build-driver buildah
-
+          retry_push_count: 3
           
